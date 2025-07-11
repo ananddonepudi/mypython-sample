@@ -11,7 +11,7 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t 344249396000.dkr.ecr.ap-south-1.amazonaws.com/vinrepo:latest .
-      - docker tag 344249396000.dkr.ecr.ap-south-1.amazonaws.com/vinrepo:latest 344249396000.dkr.ecr.ap-south-1.amazonaws.com/vinrepo:latest:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker tag 344249396000.dkr.ecr.ap-south-1.amazonaws.com/vinrepo:latest 344249396000.dkr.ecr.ap-south-1.amazonaws.com/vinrepo:$CODEBUILD_RESOLVED_SOURCE_VERSION
   post_build:
     commands:
       - echo Build completed on `date`
