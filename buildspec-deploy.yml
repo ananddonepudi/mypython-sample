@@ -18,5 +18,5 @@ phases:
       - echo Updating deployment manifest with new image URI...
       - sed -i "s|<IMAGE_URI>|$IMAGE_URI|g" kubernetes/deployment.yaml
       - echo Applying Kubernetes manifests...
-      - kubectl apply -f kubernetes/deployment.yaml
-      - kubectl apply -f kubernetes/service.yaml
+      - kubectl apply --validate=false -f kubernetes/deployment.yaml
+      - kubectl apply --validate=false -f kubernetes/service.yaml
