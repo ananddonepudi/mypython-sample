@@ -2,11 +2,13 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      kubectl: 1.30
     commands:
       - echo Installing kubectl...
-      - aws eks update-kubeconfig --region ap-south-1 --name myEKScluster
+      - curl -LO "https://dl.k8s.io/release/v1.30.0/bin/linux/amd64/kubectl"
+      - chmod +x kubectl
+      - mv kubectl /usr/local/bin/
+      - kubectl version --client
+      - aws eks update-kubeconfig --region $AWS_REGION --name $EKS_CLUSTER_NAME
   pre_build:
     commands:
       - echo Set image variable
