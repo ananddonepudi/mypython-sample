@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      kubectl: 1.30
+    commands:
+      - echo Installing kubectl...
+      - aws eks update-kubeconfig --region ap-south-1 --name myEKScluster
+  pre_build:
+    commands:
+      - echo Set image variable
+      - IMAGE_URI=344249396000.dkr.ecr.ap-south-1.amazonaws.com/vinrepo:$CODEBUILD_RESOLVED_SOURCE_VERSION
+  build:
+    commands:
+      - echo Updating deployment manifest with new image URI...
+      - sed -i "s|<IMAGE_URI>|$IMAGE_URI|g" kubernetes/deployment.yaml
+      - echo Applying Kubernetes manifests...
+      - kubectl apply -f kubernetes/deployment.yaml
+      - kubectl apply -f kubernetes/service.yaml
