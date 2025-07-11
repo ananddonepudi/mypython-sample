@@ -8,7 +8,7 @@ phases:
       - chmod +x kubectl
       - mv kubectl /usr/local/bin/
       - kubectl version --client
-      - aws eks update-kubeconfig --region $AWS_REGION --name $EKS_CLUSTER_NAME
+      - aws eks update-kubeconfig --name myEKScluster --region ap-south-1
   pre_build:
     commands:
       - echo Set image variable
